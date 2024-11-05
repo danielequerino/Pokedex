@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:pokedex/dominio/Pokemon.dart';
-import 'package:pokedex/telas/detalhes_pokemon.dart'; // Certifique-se de importar a tela de detalhes
+import 'package:pokedex/telas/detalhes_pokemon.dart';
 
 class PokemonCard extends StatelessWidget {
   final Pokemon pokemon;
@@ -34,11 +34,10 @@ class PokemonCard extends StatelessWidget {
 
     return GestureDetector(
       onTap: () {
-        // Navega para a tela de detalhes do Pokémon ao clicar no card
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => PokemonDetalhes(pokemon: pokemon), // Certifique-se de passar o Pokémon
+            builder: (context) => PokemonDetalhes(pokemon: pokemon),
           ),
         );
       },

@@ -19,7 +19,7 @@ class PokedexPage extends StatelessWidget {
           crossAxisCount: 2,
           crossAxisSpacing: 8,
           mainAxisSpacing: 8,
-          childAspectRatio: 0.85, // Ajuste para deixar o card mais quadrado
+          childAspectRatio: 0.85,
         ),
         itemCount: pokemons.length,
         itemBuilder: (context, index) {

@@ -38,7 +38,7 @@ class PokemonDetalhes extends StatelessWidget {
     }
 
 
-    final double maxStatValue = 250; // Ajuste conforme necessário
+    final double maxStatValue = 250;
 
     return Scaffold(
       appBar: AppBar(
@@ -97,16 +97,12 @@ class PokemonDetalhes extends StatelessWidget {
                       textAlign: TextAlign.center,
                     ),
                     SizedBox(height: 10),
-                    // Barra de HP
                     _buildStatBar('HP', pokemon.baseStats.hp, maxStatValue),
                     SizedBox(height: 10),
-                    // Barra de Ataque
                     _buildStatBar('Attack', pokemon.baseStats.attack, maxStatValue),
                     SizedBox(height: 10),
-                    // Barra de Defesa
                     _buildStatBar('Defense', pokemon.baseStats.defense, maxStatValue),
                     SizedBox(height: 10),
-                    // Barra de Velocidade
                     _buildStatBar('Speed', pokemon.baseStats.speed, maxStatValue),
                   ],
                 ),
