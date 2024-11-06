@@ -22,6 +22,7 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: data.providers,
       child: MaterialApp(
+        title: "Pokedex",
         debugShowCheckedModeBanner: false,
         home: HomePage(),
       )

@@ -1,10 +1,9 @@
-import 'BaseStats.dart';
-
+/*
 class Pokemon {
   final int id;
   final String englishName;
   final List<String> type;
-  final BaseStats baseStats;
+  final Map<String, int> baseStats; // Alterado para Map
 
   Pokemon({
     required this.id,
@@ -15,33 +14,24 @@ class Pokemon {
 
   factory Pokemon.fromJson(Map<String, dynamic> json) {
     return Pokemon(
-      id: json['id'],
+      id: int.parse(json['id']), // Converte ID para int
       englishName: json['name']['english'],
       type: List<String>.from(json['type']),
-      baseStats: BaseStats.fromJson(json['base']),
+      baseStats: Map<String, int>.from(json['base'].map((key, value) => MapEntry(key, value))),
     );
   }
-}
+}*/
 
-
-
-/*
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'BaseStats.dart';
 
-part 'Pokemon.freezed.dart';
-part 'Pokemon.g.dart';
+part 'pokemon.freezed.dart';
 
 @freezed
 class Pokemon with _$Pokemon {
   const factory Pokemon({
     required int id,
-    required String englishName, // Campo obrigatório
+    required String englishName,
     required List<String> type,
-    required BaseStats baseStats,
+    required Map<String, int> baseStats, // Usando Map conforme solicitado
   }) = _Pokemon;
-
-  factory Pokemon.fromJson(Map<String, dynamic> json) => _$PokemonFromJson(json);
 }
-
-*/
