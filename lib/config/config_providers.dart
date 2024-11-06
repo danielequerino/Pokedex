@@ -9,7 +9,7 @@ class ConfigureProviders {
 
   static Future<ConfigureProviders> createDependencyTree() async {
     // Instanciando o ClienteApi
-    final clienteApi = ClienteApi(baseUrl: "http://192.168.1.104:3000");
+    final clienteApi = ClienteApi(baseUrl: "http://192.168.1.103:3000");
     //final apiClient = ApiClient(baseUrl: "http://192.168.1.106:3000");
 
     return ConfigureProviders(providers: [
