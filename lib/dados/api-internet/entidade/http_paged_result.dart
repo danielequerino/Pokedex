@@ -76,10 +76,4 @@ class PokemonEntity {
       ),
     );
   }
-
-
-  @override
-  String toString() {
-    return 'PokemonEntity{id: $id, name: $name}';
-  }
 }

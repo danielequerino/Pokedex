@@ -5,7 +5,7 @@ import 'package:path/path.dart';
 
 abstract class BaseDao {
   static const databaseVersion = 1;
-  static const _databaseName = 'pokemon_database.db';  // Alterado para o nome do banco de dados
+  static const _databaseName = 'pokemon_banco_dados.db';  // Alterado para o nome do banco de dados
 
   Database? _database;
 
@@ -32,9 +32,15 @@ abstract class BaseDao {
       '''
       CREATE TABLE ${PokemonDatabaseContract.pokemonTable}(
       ${PokemonDatabaseContract.idColumn} INTEGER PRIMARY KEY AUTOINCREMENT,
-      ${PokemonDatabaseContract.englishNameColumn} TEXT NOT NULL,
-      ${PokemonDatabaseContract.typesColumn} TEXT NOT NULL,  -- Tipos armazenados como uma string JSON
-      ${PokemonDatabaseContract.baseStatsColumn} TEXT NOT NULL  -- baseStats armazenado como uma string JSON
+      ${PokemonDatabaseContract.nameColumn} TEXT NOT NULL,
+      ${PokemonDatabaseContract.type1Column} TEXT NOT NULL,  -- Tipos armazenados como uma string JSON
+      ${PokemonDatabaseContract.type2Column} TEXT,  -- Tipos armazenados como uma string JSON (não é obrigatório)
+      ${PokemonDatabaseContract.hpColumn} INTEGER NOT NULL,  -- baseStats armazenado como um valor inteiro
+      ${PokemonDatabaseContract.attackColumn} INTEGER NOT NULL,
+      ${PokemonDatabaseContract.defenseColumn} INTEGER NOT NULL,
+      ${PokemonDatabaseContract.spAttackColumn} INTEGER NOT NULL,
+      ${PokemonDatabaseContract.spDefenseColumn} INTEGER NOT NULL,
+      ${PokemonDatabaseContract.speedColumn} INTEGER NOT NULL
       );
       ''',
     );

@@ -1,4 +1,6 @@
+import 'package:pokedex/dados/api-internet/entidade/http_paged_result.dart';
 import 'package:pokedex/dados/banco-dados/entidades-database/pokemon_database_entity.dart';
+import 'package:pokedex/dominio/excecoes/MapperException.dart';
 
 import '../../dominio/pokemon.dart';
 
@@ -6,14 +8,29 @@ class DatabaseMapper {
 
   Pokemon toPokemon(PokemonDatabaseEntity entity) {
     try {
+
+
+      print("valor speed ${entity.speed}");
+      final types = [
+        entity.type1,
+        if (entity.type2 != null) entity.type2!,
+      ];
+
       return Pokemon(
         id: entity.id!,
         name: entity.englishName,
-        type: _decodeTypes(entity.types),
-        baseStats: _decodeBaseStats(entity.baseStats),
+        type: types,
+        baseStats: {
+          'hp': entity.hp,
+          'attack': entity.attack,
+          'defense': entity.defense,
+          'spAttack': entity.spAttack,
+          'spDefense': entity.spDefense,
+          'speed': entity.speed,
+        },
       );
     } catch (e) {
-      throw "Erro ao mapper de PokemonDatabaseEntity para Pokemon {e}";
+      throw MapperException<PokemonEntity, Pokemon>(e.toString());
     }
   }
 
@@ -27,14 +44,23 @@ class DatabaseMapper {
 
   PokemonDatabaseEntity toPokemonDatabaseEntity(Pokemon pokemon) {
     try {
+      print("valor hp ${pokemon.baseStats['hp']}");
       return PokemonDatabaseEntity(
         id: pokemon.id,
         englishName: pokemon.name,
-        types: _encodeTypes(pokemon.type),
-        baseStats: _encodeBaseStats(pokemon.baseStats),
+        type1: pokemon.type[0],
+        type2: pokemon.type.length > 1
+            ? pokemon.type[1]
+            : null, // Pega o segundo tipo se existir
+        hp: pokemon.baseStats['hp'] ?? 10,
+        attack: pokemon.baseStats['attack'] ?? 15,      // Garantir que não seja nulo
+        defense: pokemon.baseStats['defense'] ?? 20,    // Garantir que não seja nulo
+        spAttack: pokemon.baseStats['spAttack'] ?? 30,  // Garantir que não seja nulo
+        spDefense: pokemon.baseStats['spDefense'] ?? 40,// Garantir que não seja nulo
+        speed: pokemon.baseStats['speed'] ?? 50,
       );
     } catch (e) {
-      throw "Erro ao mapper de PokemonDatabaseEntity para Pokemon {e}";
+      throw MapperException<PokemonEntity, Pokemon>(e.toString());
     }
   }
 
