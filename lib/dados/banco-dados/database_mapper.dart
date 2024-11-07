@@ -9,8 +9,14 @@ class DatabaseMapper {
   Pokemon toPokemon(PokemonDatabaseEntity entity) {
     try {
 
-
-      print("valor speed ${entity.speed}");
+      /*
+      print("Hp dentro do toPokemon: ${entity.hp}");
+      print("Hp dentro do toPokemon: ${entity.attack}");
+      print("Hp dentro do toPokemon: ${entity.defense}");
+      print("Hp dentro do toPokemon: ${entity.spAttack}");
+      print("Hp dentro do toPokemon: ${entity.spDefense}");
+      print("Hp dentro do toPokemon: ${entity.speed}");
+       */
       final types = [
         entity.type1,
         if (entity.type2 != null) entity.type2!,
@@ -44,7 +50,8 @@ class DatabaseMapper {
 
   PokemonDatabaseEntity toPokemonDatabaseEntity(Pokemon pokemon) {
     try {
-      print("valor hp ${pokemon.baseStats['hp']}");
+      //print("Base stats recebidos em toPokemonDatabaseEntity: ${pokemon.baseStats}");
+
       return PokemonDatabaseEntity(
         id: pokemon.id,
         englishName: pokemon.name,
@@ -53,11 +60,11 @@ class DatabaseMapper {
             ? pokemon.type[1]
             : null, // Pega o segundo tipo se existir
         hp: pokemon.baseStats['hp'] ?? 10,
-        attack: pokemon.baseStats['attack'] ?? 15,      // Garantir que não seja nulo
-        defense: pokemon.baseStats['defense'] ?? 20,    // Garantir que não seja nulo
-        spAttack: pokemon.baseStats['spAttack'] ?? 30,  // Garantir que não seja nulo
-        spDefense: pokemon.baseStats['spDefense'] ?? 40,// Garantir que não seja nulo
-        speed: pokemon.baseStats['speed'] ?? 50,
+        attack: pokemon.baseStats['attack']?? 20,
+        defense: pokemon.baseStats['defense']?? 30,
+        spAttack: pokemon.baseStats['spAttack']?? 40,
+        spDefense: pokemon.baseStats['spDefense']?? 50,
+        speed: pokemon.baseStats['speed']?? 60,
       );
     } catch (e) {
       throw MapperException<PokemonEntity, Pokemon>(e.toString());
@@ -70,28 +77,5 @@ class DatabaseMapper {
       pokemonDatabaseEntities.add(toPokemonDatabaseEntity(p));
     }
     return pokemonDatabaseEntities;
-  }
-
-  // Helper methods to encode and decode types and baseStats
-  String _encodeTypes(List<String> types) {
-    return types.join(",");  // Converte lista de tipos para uma string
-  }
-
-  List<String> _decodeTypes(String types) {
-    return types.split(",");  // Converte a string de tipos de volta para uma lista
-  }
-
-  String _encodeBaseStats(Map<String, int> baseStats) {
-    return baseStats.entries.map((e) => '${e.key}:${e.value}').join(",");  // Codifica como uma string "stat:value"
-  }
-
-  Map<String, int> _decodeBaseStats(String baseStats) {
-    final Map<String, int> stats = {};
-    final statPairs = baseStats.split(",");
-    for (var statPair in statPairs) {
-      final stat = statPair.split(":");
-      stats[stat[0]] = int.parse(stat[1]);
-    }
-    return stats;  // Decodifica a string de volta para um mapa
   }
 }

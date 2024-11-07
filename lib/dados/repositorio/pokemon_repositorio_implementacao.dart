@@ -8,7 +8,7 @@ import 'package:pokedex/dominio/pokemon.dart';
 class PokemonRepositoryImpl implements PokemonRepository {
   final ApiClient apiClient;
   final NetworkMapper networkMapper;
-  final PokemonDao pokemonDao;  // Use o DAO de Pokémon
+  final PokemonDao pokemonDao;
   final DatabaseMapper databaseMapper;
 
   PokemonRepositoryImpl({

@@ -171,7 +171,7 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
-    _pagingController = PagingController(firstPageKey: 0); // Inicializa a paginação na página 0
+    _pagingController = PagingController(firstPageKey: 0);
 
     // Listener para carregar a próxima página quando necessário
     _pagingController.addPageRequestListener((pageKey) async {
@@ -183,7 +183,7 @@ class _HomePageState extends State<HomePage> {
         final apiClient = Provider.of<ApiClient>(context, listen: false);
 
         // Chamando a API para carregar Pokémons com paginação
-        final pokemons = await apiClient.getPokemons(page: pageKey, limit: 10); // Carrega até 100 por página
+        final pokemons = await apiClient.getPokemons(page: pageKey, limit: 10);
 
         // Verifica se é a última página
         if (pokemons.isEmpty) {
@@ -221,7 +221,6 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Pokedex'),
-        backgroundColor: Theme.of(context).primaryColorLight,
       ),
       body: Center(
         child: _isLoading
@@ -247,7 +246,7 @@ class _HomePageState extends State<HomePage> {
               width: 300,
               child: ElevatedButton(
                 onPressed: () {
-                  print("Encontro Diário selecionado");
+                  print("Encontro Diário foi clicado");
                 },
                 child: Text("Encontro Diário"),
               ),
@@ -257,7 +256,7 @@ class _HomePageState extends State<HomePage> {
               width: 300,
               child: ElevatedButton(
                 onPressed: () {
-                  print("Meus Pokémons selecionado");
+                  print("Meus Pokémons foi clicado");
                 },
                 child: Text("Meus Pokémons"),
               ),
