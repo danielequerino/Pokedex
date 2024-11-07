@@ -8,7 +8,7 @@ class DatabaseMapper {
     try {
       return Pokemon(
         id: entity.id!,
-        englishName: entity.englishName,
+        name: entity.englishName,
         type: _decodeTypes(entity.types),
         baseStats: _decodeBaseStats(entity.baseStats),
       );
@@ -29,7 +29,7 @@ class DatabaseMapper {
     try {
       return PokemonDatabaseEntity(
         id: pokemon.id,
-        englishName: pokemon.englishName,
+        englishName: pokemon.name,
         types: _encodeTypes(pokemon.type),
         baseStats: _encodeBaseStats(pokemon.baseStats),
       );

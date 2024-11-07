@@ -147,10 +147,13 @@ class PokemonDetalhes extends StatelessWidget {
 */
 
 
-class PokemonDetalhes extends StatelessWidget {
-  final PokemonEntity pokemonEntity;
+import 'package:pokedex/dominio/pokemon.dart'; // Ajuste o import conforme o seu projeto
 
-  PokemonDetalhes({Key? key, required this.pokemonEntity}) : super(key: key);
+
+class PokemonDetalhes extends StatelessWidget {
+  final Pokemon pokemon;
+
+  PokemonDetalhes({Key? key, required this.pokemon}) : super(key: key);
 
   final Map<String, Color> typeColors = {
     'Fire': Colors.red,
@@ -172,13 +175,13 @@ class PokemonDetalhes extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final String formattedId = pokemonEntity.id.toString().padLeft(3, '0');
+    final String formattedId = pokemon.id.toString().padLeft(3, '0');
     final String imageUrl = 'https://raw.githubusercontent.com/fanzeyi/pokemon.json/master/images/$formattedId.png';
 
     // Definindo a cor de fundo com base no tipo do Pokémon
     Color backgroundColor;
-    if (typeColors.containsKey(pokemonEntity.type.first)) {
-      backgroundColor = typeColors[pokemonEntity.type.first]!;  // Supondo que `type` seja uma lista de strings
+    if (typeColors.containsKey(pokemon.type.first)) {
+      backgroundColor = typeColors[pokemon.type.first]!;  // Supondo que `type` seja uma lista de strings
     } else {
       backgroundColor = Colors.grey.shade200;
     }
@@ -187,7 +190,7 @@ class PokemonDetalhes extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(pokemonEntity.englishName),
+        title: Text(pokemon.name), // Acessando o nome diretamente da classe Pokemon
         backgroundColor: backgroundColor,
       ),
       body: Container(
@@ -220,7 +223,7 @@ class PokemonDetalhes extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Text(
-                      '#${formattedId} ${pokemonEntity.englishName}',
+                      '#${formattedId} ${pokemon.name}', // Acessando o nome diretamente da classe Pokemon
                       style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
                       textAlign: TextAlign.center,
                     ),
@@ -228,7 +231,7 @@ class PokemonDetalhes extends StatelessWidget {
                     Wrap(
                       spacing: 8,
                       alignment: WrapAlignment.center,
-                      children: pokemonEntity.type.map((type) {
+                      children: pokemon.type.map((type) {
                         return Chip(
                           label: Text(type),
                           backgroundColor: typeColors[type] ?? Colors.grey.shade300,
@@ -237,18 +240,18 @@ class PokemonDetalhes extends StatelessWidget {
                     ),
                     SizedBox(height: 20),
                     Text(
-                      'Bases Estatísticas',
+                      'Base Stats',
                       style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
                       textAlign: TextAlign.center,
                     ),
                     SizedBox(height: 10),
-                    _buildStatBar('HP', pokemonEntity.baseStats['HP']!, maxStatValue),
+                    _buildStatBar('HP', pokemon.baseStats['HP']!, maxStatValue),
                     SizedBox(height: 10),
-                    _buildStatBar('Attack', pokemonEntity.baseStats['Attack']!, maxStatValue),
+                    _buildStatBar('Attack', pokemon.baseStats['Attack']!, maxStatValue),
                     SizedBox(height: 10),
-                    _buildStatBar('Defense', pokemonEntity.baseStats['Defense']!, maxStatValue),
+                    _buildStatBar('Defense', pokemon.baseStats['Defense']!, maxStatValue),
                     SizedBox(height: 10),
-                    _buildStatBar('Speed', pokemonEntity.baseStats['Speed']!, maxStatValue),
+                    _buildStatBar('Speed', pokemon.baseStats['Speed']!, maxStatValue),
                   ],
                 ),
               ),
@@ -287,4 +290,3 @@ class PokemonDetalhes extends StatelessWidget {
     );
   }
 }
-

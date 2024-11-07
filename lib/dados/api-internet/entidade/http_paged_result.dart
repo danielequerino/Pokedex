@@ -25,6 +25,8 @@ class HttpPagedResult {
   factory HttpPagedResult.fromJson(Map<String, dynamic> json) => _$HttpPagedResultFromJson(json);
 }
 
+
+/*
 @JsonSerializable()
 class PokemonEntity {
   int id;
@@ -44,5 +46,40 @@ class PokemonEntity {
   @override
   String toString() {
     return 'PokemonEntity{id: $id, englishName: $englishName}';
+  }
+}
+*/
+
+@JsonSerializable()
+class PokemonEntity {
+  String id;
+  Map<String, String> name; // Nome em vários idiomas, incluindo "english"
+  List<String> type;
+  Map<String, int> baseStats;
+
+  PokemonEntity({
+    required this.id,
+    required this.name,
+    required this.type,
+    required this.baseStats,
+  });
+
+  factory PokemonEntity.fromJson(Map<String, dynamic> json) {
+    return PokemonEntity(
+      id: json['id'],
+      name: Map<String, String>.from(json['name']),
+      type: List<String>.from(json['type']),
+      baseStats: Map<String, int>.from(
+        (json['base'] as Map<String, dynamic>).map(
+              (key, value) => MapEntry(key, int.parse(value.toString())), // Conversão para int
+        ),
+      ),
+    );
+  }
+
+
+  @override
+  String toString() {
+    return 'PokemonEntity{id: $id, name: $name}';
   }
 }

@@ -157,6 +157,7 @@ class _PokedexPageState extends State<PokedexPage> {
           _pagingController.appendPage(pokemons, pageKey + 1);
         } catch (e) {
           _pagingController.error = e;
+          print(e);
         }
       },
     );

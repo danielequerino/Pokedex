@@ -23,7 +23,7 @@ class Pokemon {
 }*/
 
 import 'package:freezed_annotation/freezed_annotation.dart';
-
+/*
 part 'pokemon.freezed.dart';
 
 @freezed
@@ -34,4 +34,28 @@ class Pokemon with _$Pokemon {
     required List<String> type,
     required Map<String, int> baseStats, // Usando Map conforme solicitado
   }) = _Pokemon;
+}
+*/
+class Pokemon {
+  final int id;
+  final String name;
+  final List<String> type;
+  final Map<String, int> baseStats; // Usando Map conforme solicitado
+
+  // Construtor da classe
+  const Pokemon({
+    required this.id,
+    required this.name,
+    required this.type,
+    required this.baseStats,
+  });
+
+  // Método para representar o Pokemon como uma string
+  @override
+  String toString() {
+    return 'Pokemon{id: $id, englishName: $name, type: $type, baseStats: $baseStats}';
+  }
+
+  // Método para criar uma cópia do Pokemon com modificações
+
 }
