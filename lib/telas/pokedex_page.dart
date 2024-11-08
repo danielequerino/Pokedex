@@ -48,14 +48,8 @@ class _PokedexPageState extends State<PokedexPage> {
       appBar: AppBar(
         title: Text("Pokédex"),
       ),
-      body: PagedGridView<int, Pokemon>(
+      body: PagedListView<int, Pokemon>(
         pagingController: _pagingController,
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
-          crossAxisSpacing: 8,
-          mainAxisSpacing: 8,
-          childAspectRatio: 0.85,
-        ),
         builderDelegate: PagedChildBuilderDelegate<Pokemon>(
           itemBuilder: (context, pokemon, index) => PokemonCard(pokemon: pokemon),
         ),
