@@ -4,7 +4,7 @@ import 'package:sqflite/sqflite.dart';
 
 class PokemonDao extends BaseDao {
 
-  // Método para selecionar todos os pokémons
+
   Future<List<PokemonDatabaseEntity>> selectAll({
     int? limit,
     int? offset,
@@ -21,13 +21,13 @@ class PokemonDao extends BaseDao {
     });
   }
 
-  // Método para inserir um único Pokémon
+
   Future<void> insert(PokemonDatabaseEntity entity) async {
     final Database db = await getDb();
     await db.insert(PokemonDatabaseContract.pokemonTable, entity.toJson());
   }
 
-  // Método para inserir múltiplos pokémons
+
   Future<void> insertAll(List<PokemonDatabaseEntity> entities) async {
     final Database db = await getDb();
     await db.transaction((transaction) async {
@@ -37,7 +37,7 @@ class PokemonDao extends BaseDao {
     });
   }
 
-  // Método para deletar todos os pokémons
+
   Future<void> deleteAll() async {
     final Database db = await getDb();
     await db.delete(PokemonDatabaseContract.pokemonTable);

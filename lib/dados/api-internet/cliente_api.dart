@@ -8,13 +8,7 @@ class ApiClient {
 
   ApiClient({required String baseUrl}) {
     _dio = Dio()
-      ..options.baseUrl = baseUrl
-      ..interceptors.add(
-        LogInterceptor(
-          requestBody: true,
-          responseBody: true,
-        ),
-      );
+      ..options.baseUrl = baseUrl;
   }
 
   Future<List<PokemonEntity>> getPokemons({int? page, int? limit}) async {
@@ -29,7 +23,6 @@ class ApiClient {
 
       print("Primeiro Response: ${response.data}");
 
-      // Verifique se data existe e é uma lista
       if (response.data['data'] != null && response.data['data'] is List) {
         final List<dynamic> allData = response.data['data'];
         return allData
